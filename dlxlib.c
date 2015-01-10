@@ -45,8 +45,9 @@ char * fileToString(char * filename){
 	fseek(input_file, 0, SEEK_END);
 	input_file_size = ftell(input_file);
 	rewind(input_file);
-	ret = malloc(input_file_size * (sizeof(char)));
+	ret = malloc((input_file_size+1) * (sizeof(char)));
 	fread(ret, sizeof(char), input_file_size, input_file);
+	ret[input_file_size] = '\0';
 	fclose(input_file);
 	return ret;
 }
