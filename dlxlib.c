@@ -79,12 +79,14 @@ vector * split(char * str, char * delim){
 	}
 
 	v->size=count;
-	v->ar = calloc(sizeof(char*),count);
+	v->ar = malloc(sizeof(char*)*count);
 	token = str;
     for (int i = 0; i < count;i++) {
     	((char **)v->ar)[i] = dupStr(token);
-        token += strlen(token) + 1;  // get the next token by skipping past the '\0'
-        token += strspn(token, delim); //   then skipping any starting delimiters
+    		if(i<count-1){
+    			token += strlen(token) + 1;  // get the next token by skipping past the '\0'
+        	token += strspn(token, delim); //   then skipping any starting delimiters
+    		}
     }
 
    return v;
